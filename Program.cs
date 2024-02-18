@@ -1,10 +1,15 @@
 using ComponenteGenerico.Components;
+using ComponenteGenerico.DAL;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
+
+builder.Services.AddDbContext<Contexto>
+	(o => o.UseSqlite(builder.Configuration.GetConnectionString("ConStr")));
 
 var app = builder.Build();
 
